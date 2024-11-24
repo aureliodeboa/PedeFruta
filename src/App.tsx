@@ -9,12 +9,11 @@ import { ProductDetailsPage } from './pages/ProductDetailsPage';
 import { AddProductPage } from './pages/AddProductPage';
 import PaymentPage from './pages/PaymentPage';
 import { SmartContractsPage } from './pages/SmartContractsPage';
+import ProfilePage from './pages/ProfilePage';
 
 const App: React.FC = () => {
   const handleConfirmPayment = (paymentMethod: string) => {
-    // Lógica para processar o pagamento
     console.log(`Método de pagamento selecionado: ${paymentMethod}`);
-    // Exemplo de redirecionamento ou mensagem de sucesso após pagamento
   };
 
   return (
@@ -29,6 +28,7 @@ const App: React.FC = () => {
         <Route path="/dashboard/produtor/adicionar-produto" element={<AddProductPage />} />
         <Route path="/dashboard/:userType/contratos-inteligentes" element={<SmartContractsPage />} />
         <Route path="/pagamento" element={<PaymentPage onConfirmPayment={handleConfirmPayment} />} />
+        <Route path="/perfil/:userType" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   );
