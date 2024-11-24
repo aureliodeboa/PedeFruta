@@ -3,17 +3,20 @@ import { ShoppingCart, Menu, X, Home, Package, LogIn } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface NavbarProps {
-  quantidadeItens: number;
-  onCarrinhoClick: () => void;
+  quantidadeItens?: number; // Opcional, só usado quando o carrinho é exibido
+  onCarrinhoClick?: () => void; // Opcional, só usado quando o carrinho é exibido
+  exibirCarrinho?: boolean; // Controla se o carrinho será exibido
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick }) => {
+export const Navbar: React.FC<NavbarProps> = ({
+  quantidadeItens = 0,
+  onCarrinhoClick,
+  exibirCarrinho = true,
+}) => {
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleNavigation = (path: string) => {
     navigate(path);
@@ -33,7 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick
           {/* Logo */}
           <h1 className="text-2xl font-bold">Pe de Fruta</h1>
 
-          {/* Navegação Desktop - Centralizada */}
+          {/* Navegação Desktop */}
           <nav className="hidden md:flex flex-1 justify-center gap-20">
             {navItems.map((item) => (
               <button
@@ -49,16 +52,19 @@ export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick
 
           {/* Carrinho e Menu Hamburguer */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={onCarrinhoClick}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary-green hover:bg-primary-red text-primary-white transition-colors duration-200"
-              aria-label={`Carrinho com ${quantidadeItens} itens`}
-            >
-              <ShoppingCart className="h-5 w-5" />
-              <span className="font-semibold">{quantidadeItens}</span>
-            </button>
+            {/* Carrinho */}
+            {exibirCarrinho && (
+              <button
+                onClick={onCarrinhoClick}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary-green hover:bg-primary-red text-primary-white transition-colors duration-200"
+                aria-label={`Carrinho com ${quantidadeItens} itens`}
+              >
+                <ShoppingCart className="h-5 w-5" />
+                <span className="font-semibold">{quantidadeItens}</span>
+              </button>
+            )}
 
-            {/* Menu Hamburguer para Mobile */}
+            {/* Menu Hamburguer */}
             <button
               onClick={toggleMenu}
               className="md:hidden p-2 rounded-full hover:bg-primary-green transition-colors duration-200"

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'; // Importando useNavigate
 import { Link } from 'react-router-dom';
-import { Navbar } from '../components/Navbar'; // Importação corrigida
+import { Navbar } from '../components/Navbar'; 
 import { colors } from '../styles/colors';
 import { ItemCarrinho } from '../types/types';
+import { CartModal } from '../components/CartModal';
 
 interface Product {
   id: number;
@@ -16,7 +17,8 @@ interface Product {
 
 export const DashboardPage: React.FC = () => {
   const { userType } = useParams<{ userType: 'consumidor' | 'produtor' }>();
-  const [carrinho] = useState<ItemCarrinho[]>([]);
+  const navigate = useNavigate(); // Usando o hook useNavigate
+  const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]); // Definindo o estado para o carrinho
   const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
   const [products, setProducts] = useState<Product[]>([
     {
@@ -43,6 +45,16 @@ export const DashboardPage: React.FC = () => {
     setProducts(filteredProducts);
   };
 
+  // Função para redirecionar para a página de adicionar produto
+  const handleAddProduct = () => {
+    navigate('/dashboard/produtor/adicionar-produto'); // Redireciona para a página de adicionar produto
+  };
+
+  // Função para remover item do carrinho
+  const handleRemoveItem = (id: number) => {
+    setCarrinho(carrinho.filter(item => item.id !== id));
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.primary.white }}>
       {/* Chamando a Navbar antes de todo o conteúdo */}
@@ -50,6 +62,15 @@ export const DashboardPage: React.FC = () => {
         quantidadeItens={carrinho.length}
         onCarrinhoClick={() => setMostrarCarrinho(false)}
       />
+
+      {/* Condicionalmente exibe o carrinho se mostrarCarrinho for true */}
+        {/* Modal do Carrinho */}
+        <CartModal
+            isOpen={mostrarCarrinho}
+            onClose={() => setMostrarCarrinho(false)} // Fecha o carrinho
+            cartItems={carrinho}
+            onRemoveItem={handleRemoveItem} // Passa a função de remoção de item
+        />
       
       <div className="min-h-screen bg-gradient-to-b from-[#fcfcfc] to-[#e8e8e8] p-8">
         <div className="max-w-screen-lg mx-auto">
@@ -111,6 +132,7 @@ export const DashboardPage: React.FC = () => {
               {userType === 'produtor' && (
                 <button
                   className="w-full bg-[#e71d36] text-[#fcfcfc] py-3 rounded-lg font-semibold hover:bg-[#bf1a2d] transition-all"
+                  onClick={handleAddProduct} // Redireciona ao clicar
                 >
                   Adicionar Novo Produto
                 </button>
@@ -165,7 +187,7 @@ export const DashboardPage: React.FC = () => {
                         to={`/dashboard/produtor/produto/${product.id}`}
                         className="mt-4 inline-block w-full bg-[#20bf55] text-[#fcfcfc] py-2 rounded-lg text-center font-semibold hover:bg-[#09814a] transition-all"
                       >
-                        Editar Produto
+                        Ver Detalhes
                       </Link>
                     </div>
                   </div>
