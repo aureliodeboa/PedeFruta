@@ -5,9 +5,10 @@ import { ShoppingCart, Info } from 'lucide-react';
 interface ProductCardProps {
   fruta: Fruta;
   onAddToCart: (fruta: Fruta) => void;
+  onViewDetails: (fruta: Fruta) => void; // Adicionando onViewDetails como uma prop
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ fruta, onAddToCart }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ fruta, onAddToCart, onViewDetails }) => {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       <div className="relative">
@@ -38,6 +39,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ fruta, onAddToCart }) 
               <ShoppingCart size={18} />
             </button>
             <button
+              onClick={() => onViewDetails(fruta)} // Chama onViewDetails ao clicar no ícone
               className="bg-primary-dark hover:bg-primary-darkGreen text-primary-white p-2 rounded-full transition-colors duration-200"
               aria-label={`Mais informações sobre ${fruta.nome}`}
             >
@@ -49,4 +51,3 @@ export const ProductCard: React.FC<ProductCardProps> = ({ fruta, onAddToCart }) 
     </div>
   );
 };
-

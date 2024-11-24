@@ -1,6 +1,7 @@
 import React from 'react';
 import { ItemCarrinho } from '../types/types';
 import { X, Trash2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // Substitua useHistory por useNavigate
 
 interface CartModalProps {
   isOpen: boolean;
@@ -17,10 +18,20 @@ export const CartModal: React.FC<CartModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
+  const navigate = useNavigate(); // Use o hook useNavigate
   const totalCarrinho = cartItems.reduce(
     (total, item) => total + item.preco * item.quantidade,
     0
   );
+
+  const handleFinishPurchase = () => {
+    // Armazenar os itens do carrinho no localStorage
+    localStorage.setItem('carrinho', JSON.stringify(cartItems));
+  
+    // Navegar para a página de pagamento
+    navigate('/pagamento');
+  };
+  
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
@@ -35,7 +46,7 @@ export const CartModal: React.FC<CartModalProps> = ({
             <X size={24} />
           </button>
         </div>
-        
+
         <div className="p-6">
           {cartItems.length === 0 ? (
             <p className="text-center text-gray-500">Seu carrinho está vazio</p>
@@ -51,7 +62,8 @@ export const CartModal: React.FC<CartModalProps> = ({
                       </p>
                     </div>
                     <button
-                      name='butao' aria-labelledby='butao'
+                      name="butao"
+                      aria-labelledby="butao"
                       onClick={() => onRemoveItem(item.id)}
                       className="text-primary-red hover:text-primary-darkGreen transition-colors"
                       aria-label={`Remover ${item.nome} do carrinho`}
@@ -68,7 +80,12 @@ export const CartModal: React.FC<CartModalProps> = ({
                     R$ {totalCarrinho.toFixed(2)}
                   </span>
                 </div>
-                <button name='butao' aria-labelledby='butao' className="mt-4 w-full bg-primary-green hover:bg-primary-darkGreen text-primary-white font-bold py-2 px-4 rounded transition-colors">
+                <button
+                  name="butao"
+                  aria-labelledby="butao"
+                  onClick={handleFinishPurchase}
+                  className="mt-4 w-full bg-primary-green hover:bg-primary-darkGreen text-primary-white font-bold py-2 px-4 rounded transition-colors"
+                >
                   Finalizar Compra
                 </button>
               </div>
@@ -79,4 +96,3 @@ export const CartModal: React.FC<CartModalProps> = ({
     </div>
   );
 };
-

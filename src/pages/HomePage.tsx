@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Navbar } from '../components/Navbar';
 import { ProductGrid } from '../components/ProductGrid';
 import { CartModal } from '../components/CartModal';
+import { ProductDetailsModal } from '../components/ProductDetailsModal'; // Novo Modal
 import { Fruta, ItemCarrinho } from '../types/types';
 import { colors } from '../styles/colors';
+
 const produtos: Fruta[] = [
   {
     id: 1,
@@ -42,11 +44,13 @@ const produtos: Fruta[] = [
 export const HomePage: React.FC = () => {
   const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]);
   const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
+  const [mostrarDetalhesProduto, setMostrarDetalhesProduto] = useState(false); // Estado para controlar o modal de detalhes
+  const [produtoSelecionado, setProdutoSelecionado] = useState<Fruta | null>(null); // Produto selecionado para detalhes
 
   const adicionarAoCarrinho = (fruta: Fruta) => {
     setCarrinho(carrinhoAtual => {
       const itemExistente = carrinhoAtual.find(item => item.id === fruta.id);
-      
+
       if (itemExistente) {
         return carrinhoAtual.map(item =>
           item.id === fruta.id
@@ -54,15 +58,20 @@ export const HomePage: React.FC = () => {
             : item
         );
       }
-      
+
       return [...carrinhoAtual, { ...fruta, quantidade: 1 }];
     });
   };
 
   const removerDoCarrinho = (id: number) => {
-    setCarrinho(carrinhoAtual => 
+    setCarrinho(carrinhoAtual =>
       carrinhoAtual.filter(item => item.id !== id)
     );
+  };
+
+  const mostrarDetalhes = (produto: Fruta) => {
+    setProdutoSelecionado(produto);
+    setMostrarDetalhesProduto(true);
   };
 
   return (
@@ -76,6 +85,7 @@ export const HomePage: React.FC = () => {
         <ProductGrid
           produtos={produtos}
           onAddToCart={adicionarAoCarrinho}
+          onViewDetails={mostrarDetalhes} // Passar a função para visualizar os detalhes
         />
       </main>
 
@@ -85,6 +95,15 @@ export const HomePage: React.FC = () => {
         cartItems={carrinho}
         onRemoveItem={removerDoCarrinho}
       />
+      
+      {/* Modal de Detalhes do Produto */}
+      {produtoSelecionado && (
+        <ProductDetailsModal
+          isOpen={mostrarDetalhesProduto}
+          onClose={() => setMostrarDetalhesProduto(false)}
+          produto={produtoSelecionado}
+        />
+      )}
     </div>
   );
 };
