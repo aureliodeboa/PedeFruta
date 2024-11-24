@@ -29,26 +29,26 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Campo de e-mail */}
         <div className="relative">
-          <Mail className="absolute left-3 top-3 text-gray-400" size={20} />
+          <Mail className="absolute left-3 top-3 text-[#1e2019]" size={20} />
           <input
             type="email"
             placeholder="Seu e-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-green"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-[#f0f0f0] focus:outline-none focus:border-primary-green text-[#1e2019]"
             required
           />
         </div>
 
         {/* Campo de senha */}
         <div className="relative">
-          <Lock className="absolute left-3 top-3 text-gray-400" size={20} />
+          <Lock className="absolute left-3 top-3 text-[#1e2019]" size={20} />
           <input
             type="password"
             placeholder="Sua senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-green"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-[#f0f0f0] focus:outline-none focus:border-primary-green text-[#1e2019]"
             required
           />
         </div>
