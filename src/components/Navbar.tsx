@@ -37,6 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick
             <nav className="hidden md:flex gap-20 ">
               {navItems.map((item) => (
                 <button 
+                  name='butao' aria-labelledby='butao'
                   key={item.path}
                   onClick={() => handleNavigation(item.path)} 
                   className="flex items-center gap-2 hover:text-primary-green transition-colors duration-200"
@@ -50,6 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick
 
           <div className="flex items-center gap-4">
             <button
+              name='butao' aria-labelledby='butao'
               onClick={onCarrinhoClick}
               className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary-green hover:bg-primary-red text-primary-white transition-colors duration-200"
               aria-label={`Carrinho com ${quantidadeItens} itens`}
@@ -60,6 +62,7 @@ export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick
 
             {/* Hamburger Menu Button - Only visible on mobile */}
             <button
+              
               onClick={toggleMenu}
               className="md:hidden p-2 rounded-full hover:bg-primary-green transition-colors duration-200"
               aria-label="Toggle menu"

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Fruta } from '../types/types';
-import { colors } from '../styles/colors';
 import { ShoppingCart, Info } from 'lucide-react';
 
 interface ProductCardProps {

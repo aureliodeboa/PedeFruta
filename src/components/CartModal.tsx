@@ -52,6 +52,7 @@ export const CartModal: React.FC<CartModalProps> = ({
                       </p>
                     </div>
                     <button
+                      name='butao' aria-labelledby='butao'
                       onClick={() => onRemoveItem(item.id)}
                       className="text-primary-red hover:text-primary-darkGreen transition-colors"
                       aria-label={`Remover ${item.nome} do carrinho`}
@@ -68,7 +69,7 @@ export const CartModal: React.FC<CartModalProps> = ({
                     R$ {totalCarrinho.toFixed(2)}
                   </span>
                 </div>
-                <button className="mt-4 w-full bg-primary-green hover:bg-primary-darkGreen text-primary-white font-bold py-2 px-4 rounded transition-colors">
+                <button name='butao' aria-labelledby='butao' className="mt-4 w-full bg-primary-green hover:bg-primary-darkGreen text-primary-white font-bold py-2 px-4 rounded transition-colors">
                   Finalizar Compra
                 </button>
               </div>
