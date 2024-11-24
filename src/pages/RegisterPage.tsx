@@ -91,7 +91,7 @@ export const RegisterPage: React.FC = () => {
               value={formData.nome}
               onChange={handleInputChange}
               required
-              className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 transition-all duration-200"
+              className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 focus:ring-primary-green focus:text-[#1e2019] focus:bg-primary-white transition-all duration-100"
             />
           </div>
 
@@ -104,7 +104,7 @@ export const RegisterPage: React.FC = () => {
               value={formData.email}
               onChange={handleInputChange}
               required
-              className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 transition-all duration-200"
+              className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 focus:ring-primary-green focus:text-[#1e2019] focus:bg-primary-white transition-all duration-100"
             />
           </div>
 
@@ -117,7 +117,7 @@ export const RegisterPage: React.FC = () => {
               value={formData.telefone}
               onChange={handleInputChange}
               required
-              className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 transition-all duration-200"
+              className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 focus:ring-primary-green focus:text-[#1e2019] focus:bg-primary-white transition-all duration-100"
             />
           </div>
 
@@ -132,7 +132,7 @@ export const RegisterPage: React.FC = () => {
                 value={formData.preferencias}
                 onChange={handleInputChange}
                 rows={3}
-                className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 transition-all duration-200"
+                className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 focus:ring-primary-green focus:text-[#1e2019] focus:bg-primary-white transition-all duration-100"
                 placeholder="Ex.: orgânico, regional, etc."
               />
             </div>
@@ -149,7 +149,7 @@ export const RegisterPage: React.FC = () => {
                   value={formData.localizacao}
                   onChange={handleInputChange}
                   required
-                  className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 transition-all duration-200"
+                  className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 focus:ring-primary-green focus:text-[#1e2019] focus:bg-primary-white transition-all duration-100"
                 />
               </div>
 
@@ -163,7 +163,7 @@ export const RegisterPage: React.FC = () => {
                   value={formData.metodosAgricolas}
                   onChange={handleInputChange}
                   rows={3}
-                  className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 transition-all duration-200"
+                  className="w-full p-2 mt-1 border-2 rounded-lg text-black bg-white focus:outline-none focus:ring-2 focus:ring-primary-green focus:text-[#1e2019] focus:bg-primary-white transition-all duration-100"
                   placeholder="Descreva os métodos utilizados na produção."
                 />
               </div>
