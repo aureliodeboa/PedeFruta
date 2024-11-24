@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface Product {
   id: number;
@@ -15,19 +16,11 @@ export const DashboardPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
-      name: 'Produto Orgânico',
+      name: 'Melancia',
       price: 15.0,
-      origin: 'Brasil',
+      origin: 'Sobradinho, Brasil',
       environmentalImpact: 'Baixo',
-      image: 'https://via.placeholder.com/150',
-    },
-    {
-      id: 2,
-      name: 'Produto Sustentável',
-      price: 30.0,
-      origin: 'Argentina',
-      environmentalImpact: 'Médio',
-      image: 'https://via.placeholder.com/150',
+      image: 'https://static.itdg.com.br/images/622-auto/8e94f29683bd0812f6aceb29764b284a/como-aproveitar-todas-as-partes-da-melancia.jpg',
     },
   ]);
 
@@ -95,12 +88,22 @@ export const DashboardPage: React.FC = () => {
             </div>
           </div>
 
-          <button
-            onClick={handleFilter}
-            className="mt-6 w-full bg-[#20bf55] text-[#fcfcfc] py-3 rounded-lg font-semibold hover:bg-[#09814a] transition-all"
-          >
-            Aplicar Filtros
-          </button>
+          <div className="flex gap-4 mt-6">
+            <button
+              onClick={handleFilter}
+              className="w-full bg-[#20bf55] text-[#fcfcfc] py-3 rounded-lg font-semibold hover:bg-[#09814a] transition-all"
+            >
+              Aplicar Filtros
+            </button>
+
+            {userType === 'produtor' && (
+              <button
+                className="w-full bg-[#e71d36] text-[#fcfcfc] py-3 rounded-lg font-semibold hover:bg-[#bf1a2d] transition-all"
+              >
+                Adicionar Novo Produto
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Conteúdo principal */}
@@ -116,6 +119,12 @@ export const DashboardPage: React.FC = () => {
                     <p className="text-sm text-[#09814a]">Origem: {product.origin}</p>
                     <p className="text-sm text-[#1e2019]">Impacto Ambiental: {product.environmentalImpact}</p>
                     <p className="text-xl font-bold text-[#20bf55]">R$ {product.price}</p>
+                    <Link
+                      to={`/dashboard/${userType}/produto/${product.id}`}
+                      className="mt-4 inline-block w-full bg-[#20bf55] text-[#fcfcfc] py-2 rounded-lg text-center font-semibold hover:bg-[#09814a] transition-all"
+                    >
+                      Ver Detalhes
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -123,24 +132,33 @@ export const DashboardPage: React.FC = () => {
           </div>
         )}
 
+        {/* Para o Produtor */}
         {userType === 'produtor' && (
           <div>
-            <h2 className="text-2xl font-semibold text-[#20bf55] mb-6">Resumo de Estoque e Vendas</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <div className="bg-[#fcfcfc] border-2 border-[#20bf55] rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-[#1e2019]">Estoque Atual</h3>
-                <p className="text-sm text-[#09814a]">Total de produtos: 150</p>
-              </div>
-              <div className="bg-[#fcfcfc] border-2 border-[#20bf55] rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-[#1e2019]">Vendas Recentes</h3>
-                <p className="text-sm text-[#09814a]">Produtos vendidos: 120</p>
-              </div>
+            <h2 className="text-2xl font-semibold text-[#20bf55] mb-6">Produtos no Estoque</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {products.map((product) => (
+                <div key={product.id} className="bg-[#fcfcfc] border-2 border-[#20bf55] rounded-xl shadow-lg overflow-hidden">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-[#1e2019]">{product.name}</h3>
+                    <p className="text-sm text-[#09814a]">Origem: {product.origin}</p>
+                    <p className="text-sm text-[#1e2019]">Impacto Ambiental: {product.environmentalImpact}</p>
+                    <p className="text-xl font-bold text-[#20bf55]">R$ {product.price}</p>
+                    <Link
+                      to={`/dashboard/produtor/produto/${product.id}`}
+                      className="mt-4 inline-block w-full bg-[#20bf55] text-[#fcfcfc] py-2 rounded-lg text-center font-semibold hover:bg-[#09814a] transition-all"
+                    >
+                      Editar Produto
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
-            <button
-              className="mt-8 bg-[#e71d36] text-[#fcfcfc] py-3 px-6 rounded-lg font-semibold hover:bg-[#bf1a2d] transition-all"
-            >
-              Adicionar Novo Produto
-            </button>
           </div>
         )}
       </div>
