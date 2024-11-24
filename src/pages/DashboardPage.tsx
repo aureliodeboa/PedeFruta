@@ -18,7 +18,8 @@ interface Product {
 export const DashboardPage: React.FC = () => {
   const { userType } = useParams<{ userType: 'consumidor' | 'produtor' }>();
   const navigate = useNavigate(); // Usando o hook useNavigate
-  const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]); // Definindo o estado para o carrinho
+  const [carrinho, setCarrinho] = useState<ItemCarrinho[]>([]);
+  const userTypeFromURL = location.pathname.split('/')[2];
   const [mostrarCarrinho, setMostrarCarrinho] = useState(false);
   const [products, setProducts] = useState<Product[]>([
     {
@@ -54,6 +55,10 @@ export const DashboardPage: React.FC = () => {
   const handleRemoveItem = (id: number) => {
     setCarrinho(carrinho.filter(item => item.id !== id));
   };
+
+  const handleSmartContracts = () => {
+    navigate(`/dashboard/${userTypeFromURL}/contratos-inteligentes`); 
+  };  
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: colors.primary.white }}>
@@ -137,6 +142,12 @@ export const DashboardPage: React.FC = () => {
                   Adicionar Novo Produto
                 </button>
               )}
+                <button
+                  onClick={handleSmartContracts}
+                  className="w-full bg-blue-600 text-[#fcfcfc] py-3 rounded-lg font-semibold hover:bg-[#076c38] transition-all"
+                >
+                  Contratos Inteligentes
+                </button>
             </div>
           </div>
 

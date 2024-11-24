@@ -8,6 +8,8 @@ import { DashboardPage } from './pages/DashboardPage';
 import { ProductDetailsPage } from './pages/ProductDetailsPage';
 import { AddProductPage } from './pages/AddProductPage';
 
+import {SmartContractsPage} from './pages/SmartContractsPage';
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -19,6 +21,7 @@ const App: React.FC = () => {
         <Route path="/dashboard/:userType" element={<DashboardPage />} />
         <Route path="/dashboard/:userType/produto/:productId" element={<ProductDetailsPage />} />
         <Route path="/dashboard/produtor/adicionar-produto" element={<AddProductPage />} />
+        <Route path="/dashboard/:userType/contratos-inteligentes" element={<SmartContractsPage />} />
       </Routes>
     </BrowserRouter>
   );
