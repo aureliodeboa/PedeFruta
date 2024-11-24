@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 interface Product {
   id: number;
@@ -9,11 +10,8 @@ interface Product {
   image: string;
 }
 
-interface DashboardPage {
-  userType: 'consumidor' | 'produtor';
-}
-
-export const DashboardPage: React.FC<DashboardPage> = ({ userType }) => {
+export const DashboardPage: React.FC = () => {
+  const { userType } = useParams<{ userType: 'consumidor' | 'produtor' }>();
   const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
@@ -33,17 +31,11 @@ export const DashboardPage: React.FC<DashboardPage> = ({ userType }) => {
     },
   ]);
 
-  // Filtros
   const [filterOrigin, setFilterOrigin] = useState('');
   const [filterImpact, setFilterImpact] = useState('');
   const [filterPrice, setFilterPrice] = useState(0);
 
-  const handleAddProduct = () => {
-    console.log('Adicionar novo produto');
-  };
-
   const handleFilter = () => {
-    // Aplique os filtros nos produtos
     const filteredProducts = products.filter((product) => {
       if (filterOrigin && product.origin !== filterOrigin) return false;
       if (filterImpact && product.environmentalImpact !== filterImpact) return false;
@@ -51,81 +43,80 @@ export const DashboardPage: React.FC<DashboardPage> = ({ userType }) => {
       return true;
     });
     setProducts(filteredProducts);
-    console.log('Filtrando...');
   };
 
   return (
-    <div className="min-h-screen bg-[#fcfcfc] p-6">
+    <div className="min-h-screen bg-gradient-to-b from-[#fcfcfc] to-[#e8e8e8] p-8">
       <div className="max-w-screen-lg mx-auto">
-        <h1 className="text-3xl font-bold text-[#20bf55] mb-8 text-center">
+        <h1 className="text-4xl font-bold text-[#20bf55] mb-12 text-center">
           {userType === 'consumidor' ? 'Dashboard do Consumidor' : 'Dashboard do Produtor'}
         </h1>
 
-        {/* Filtros para consumidores */}
-        {userType === 'consumidor' && (
-          <div className="mb-8">
-            <h2 className="text-xl font-semibold text-[#20bf55] mb-4">Filtros de Produtos</h2>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-[#1e2019]">Origem</label>
-                <select
-                  value={filterOrigin}
-                  onChange={(e) => setFilterOrigin(e.target.value)}
-                  className="w-full p-2 border-2 border-[#20bf55] rounded-lg"
-                >
-                  <option value="">Selecione a origem</option>
-                  <option value="Brasil">Brasil</option>
-                  <option value="Argentina">Argentina</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-[#1e2019]">Impacto Ambiental</label>
-                <select
-                  value={filterImpact}
-                  onChange={(e) => setFilterImpact(e.target.value)}
-                  className="w-full p-2 border-2 border-[#20bf55] rounded-lg"
-                >
-                  <option value="">Selecione o impacto</option>
-                  <option value="Baixo">Baixo</option>
-                  <option value="Médio">Médio</option>
-                  <option value="Alto">Alto</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block text-[#1e2019]">Preço</label>
-                <input
-                  type="number"
-                  value={filterPrice}
-                  onChange={(e) => setFilterPrice(Number(e.target.value))}
-                  className="w-full p-2 border-2 border-[#20bf55] rounded-lg"
-                  placeholder="Digite o preço máximo"
-                />
-              </div>
-
-              <button
-                onClick={handleFilter}
-                className="w-full bg-[#20bf55] text-[#fcfcfc] py-2 rounded-lg hover:bg-[#09814a] transition-colors"
+        {/* Filtros */}
+        <div className="bg-[#fcfcfc] p-6 rounded-xl shadow-lg mb-12">
+          <h2 className="text-2xl font-semibold text-[#20bf55] mb-6">Filtros de Produtos</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div>
+              <label className="block text-[#1e2019] font-medium mb-2">Origem</label>
+              <select
+                value={filterOrigin}
+                onChange={(e) => setFilterOrigin(e.target.value)}
+                className="w-full p-3 border-2 border-[#20bf55] rounded-lg bg-[#fcfcfc] text-[#1e2019] focus:ring-2 focus:ring-[#09814a]"
               >
-                Aplicar Filtros
-              </button>
+                <option value="">Selecione a origem</option>
+                <option value="Brasil">Brasil</option>
+                <option value="Argentina">Argentina</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-[#1e2019] font-medium mb-2">Impacto Ambiental</label>
+              <select
+                value={filterImpact}
+                onChange={(e) => setFilterImpact(e.target.value)}
+                className="w-full p-3 border-2 border-[#20bf55] rounded-lg bg-[#fcfcfc] text-[#1e2019] focus:ring-2 focus:ring-[#09814a]"
+              >
+                <option value="">Selecione o impacto</option>
+                <option value="Baixo">Baixo</option>
+                <option value="Médio">Médio</option>
+                <option value="Alto">Alto</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="block text-[#1e2019] font-medium mb-2">Preço Máximo</label>
+              <input
+                type="number"
+                value={filterPrice}
+                onChange={(e) => setFilterPrice(Number(e.target.value))}
+                className="w-full p-3 border-2 border-[#20bf55] rounded-lg bg-[#fcfcfc] text-[#1e2019] focus:ring-2 focus:ring-[#09814a]"
+                placeholder="Digite o preço máximo"
+              />
             </div>
           </div>
-        )}
 
-        {/* Produtos em destaque (para consumidores) ou Resumo de estoque (para produtores) */}
+          <button
+            onClick={handleFilter}
+            className="mt-6 w-full bg-[#20bf55] text-[#fcfcfc] py-3 rounded-lg font-semibold hover:bg-[#09814a] transition-all"
+          >
+            Aplicar Filtros
+          </button>
+        </div>
+
+        {/* Conteúdo principal */}
         {userType === 'consumidor' && (
           <div>
-            <h2 className="text-xl font-semibold text-[#20bf55] mb-4">Produtos em Destaque</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <h2 className="text-2xl font-semibold text-[#20bf55] mb-6">Produtos em Destaque</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {products.map((product) => (
-                <div key={product.id} className="border-2 border-[#20bf55] p-4 rounded-lg shadow-md">
-                  <img src={product.image} alt={product.name} className="w-full h-48 object-cover mb-4" />
-                  <h3 className="text-lg font-semibold text-[#1e2019]">{product.name}</h3>
-                  <p className="text-sm text-[#09814a]">Origem: {product.origin}</p>
-                  <p className="text-sm text-[#1e2019]">Impacto Ambiental: {product.environmentalImpact}</p>
-                  <p className="text-lg font-bold text-[#20bf55]">R$ {product.price}</p>
+                <div key={product.id} className="bg-[#fcfcfc] border-2 border-[#20bf55] rounded-xl shadow-lg overflow-hidden">
+                  <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-[#1e2019]">{product.name}</h3>
+                    <p className="text-sm text-[#09814a]">Origem: {product.origin}</p>
+                    <p className="text-sm text-[#1e2019]">Impacto Ambiental: {product.environmentalImpact}</p>
+                    <p className="text-xl font-bold text-[#20bf55]">R$ {product.price}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -134,30 +125,22 @@ export const DashboardPage: React.FC<DashboardPage> = ({ userType }) => {
 
         {userType === 'produtor' && (
           <div>
-            <h2 className="text-xl font-semibold text-[#20bf55] mb-4">Resumo de Estoque e Vendas</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="border-2 border-[#20bf55] p-4 rounded-lg shadow-md">
+            <h2 className="text-2xl font-semibold text-[#20bf55] mb-6">Resumo de Estoque e Vendas</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              <div className="bg-[#fcfcfc] border-2 border-[#20bf55] rounded-xl shadow-lg p-6">
                 <h3 className="text-lg font-semibold text-[#1e2019]">Estoque Atual</h3>
                 <p className="text-sm text-[#09814a]">Total de produtos: 150</p>
               </div>
-
-              <div className="border-2 border-[#20bf55] p-4 rounded-lg shadow-md">
+              <div className="bg-[#fcfcfc] border-2 border-[#20bf55] rounded-xl shadow-lg p-6">
                 <h3 className="text-lg font-semibold text-[#1e2019]">Vendas Recentes</h3>
                 <p className="text-sm text-[#09814a]">Produtos vendidos: 120</p>
               </div>
             </div>
-
             <button
-              onClick={handleAddProduct}
-              className="mt-6 bg-[#e71d36] text-[#fcfcfc] py-2 px-6 rounded-lg hover:bg-[#bf1a2d] transition-colors"
+              className="mt-8 bg-[#e71d36] text-[#fcfcfc] py-3 px-6 rounded-lg font-semibold hover:bg-[#bf1a2d] transition-all"
             >
               Adicionar Novo Produto
             </button>
-
-            <div className="mt-8 border-2 border-[#20bf55] p-4 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold text-[#1e2019]">Impacto Ambiental Gerado</h3>
-              <p className="text-sm text-[#09814a]">Impacto: Baixo</p>
-            </div>
           </div>
         )}
       </div>

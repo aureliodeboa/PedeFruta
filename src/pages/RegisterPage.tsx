@@ -28,13 +28,8 @@ export const RegisterPage: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log('Dados enviados:', formData);
-    // if (userType === 'consumidor') {
-    //   console.log('Redirecionar para dashboard do consumidor');
-    // } else {
-    //   console.log('Redirecionar para tela de perfil de negócios do produtor');
-    // }
-    navigate('/dashboard');
+    // Aqui você navega para o dashboard com o tipo de usuário selecionado
+    navigate(`/dashboard/${userType}`);
   };
 
   const handleGoHome = () => {
@@ -195,7 +190,6 @@ export const RegisterPage: React.FC = () => {
           <button
             type="submit"
             className="w-full bg-primary-green text-primary-white py-2 rounded-lg hover:bg-primary-darkGreen transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-green"
-            onClick={handleSubmit}
           >
             Registrar
           </button>
