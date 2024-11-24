@@ -72,7 +72,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           </button>
           <button
             type="button"
-            onClick={onCreateAccount}
+            onClick={onCreateAccount} // Aqui é chamado o onCreateAccount
             className="text-primary-green hover:text-primary-darkGreen"
           >
             Criar conta
@@ -101,7 +101,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             <img
               src="https://storage.googleapis.com/gd-prod/images/a910d418-7123-4bc4-aa3b-ef7e25e74ae6.60c498c559810aa0.webp"
               alt="Google"
-              className="h-11"
+              className="h-12"
             />
           </button>
 
@@ -111,9 +111,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({
             className="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 px-4 hover:bg-gray-50"
           >
             <img
-              src="https://logospng.org/wp-content/uploads/apple.jpg"
+              src="https://img.icons8.com/?size=150&id=30840&format=png"
               alt="Apple"
-              className="h-11"
+              className="h-9"
             />
           </button>
         </div>
