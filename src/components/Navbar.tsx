@@ -28,29 +28,28 @@ export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick
 
   return (
     <header className="sticky top-0 z-50 bg-primary-darkGreen text-primary-white shadow-md">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <div className="flex items-center gap-4 md:gap-8">
-            <h1 className="text-2xl font-bold">Pe de Fruta</h1>
-            {/* Desktop Navigation - Now on the left */}
-            <nav className="hidden md:flex gap-20 ">
-              {navItems.map((item) => (
-                <button 
-                  name='butao' aria-labelledby='butao'
-                  key={item.path}
-                  onClick={() => handleNavigation(item.path)} 
-                  className="flex items-center gap-2 hover:text-primary-green transition-colors duration-200"
-                >
-                  <item.icon className="h-5 w-5" />
-                  <span>{item.label}</span>
-                </button>
-              ))}
-            </nav>
-          </div>
+          {/* Logo */}
+          <h1 className="text-2xl font-bold">Pe de Fruta</h1>
 
+          {/* Navegação Desktop - Centralizada */}
+          <nav className="hidden md:flex flex-1 justify-center gap-20">
+            {navItems.map((item) => (
+              <button
+                key={item.path}
+                onClick={() => handleNavigation(item.path)}
+                className="flex items-center gap-2 hover:text-primary-green transition-colors duration-200"
+              >
+                <item.icon className="h-5 w-5" />
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </nav>
+
+          {/* Carrinho e Menu Hamburguer */}
           <div className="flex items-center gap-4">
             <button
-              name='butao' aria-labelledby='butao'
               onClick={onCarrinhoClick}
               className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary-green hover:bg-primary-red text-primary-white transition-colors duration-200"
               aria-label={`Carrinho com ${quantidadeItens} itens`}
@@ -59,9 +58,8 @@ export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick
               <span className="font-semibold">{quantidadeItens}</span>
             </button>
 
-            {/* Hamburger Menu Button - Only visible on mobile */}
+            {/* Menu Hamburguer para Mobile */}
             <button
-              
               onClick={toggleMenu}
               className="md:hidden p-2 rounded-full hover:bg-primary-green transition-colors duration-200"
               aria-label="Toggle menu"
@@ -77,15 +75,15 @@ export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick
         </div>
       </div>
 
-      {/* Mobile Navigation Menu */}
-      <div 
+      {/* Navegação Mobile */}
+      <div
         className={`md:hidden absolute w-full bg-primary-darkGreen overflow-hidden transition-all duration-300 ease-in-out ${
           isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <nav className="flex flex-col p-4">
           {navItems.map((item) => (
-            <button 
+            <button
               key={item.path}
               onClick={() => handleNavigation(item.path)}
               className="flex items-center gap-2 py-3 text-left hover:bg-primary-green rounded-lg px-3 transition-colors duration-200"
@@ -101,4 +99,3 @@ export const Navbar: React.FC<NavbarProps> = ({ quantidadeItens, onCarrinhoClick
 };
 
 export default Navbar;
-

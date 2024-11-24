@@ -10,7 +10,7 @@ interface LoginFormProps {
 export const LoginForm: React.FC<LoginFormProps> = ({
   onSubmit,
   onForgotPassword,
-  onCreateAccount
+  onCreateAccount,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +27,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Campo de e-mail */}
         <div className="relative">
           <Mail className="absolute left-3 top-3 text-gray-400" size={20} />
           <input
@@ -39,6 +40,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           />
         </div>
 
+        {/* Campo de senha */}
         <div className="relative">
           <Lock className="absolute left-3 top-3 text-gray-400" size={20} />
           <input
@@ -51,6 +53,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           />
         </div>
 
+        {/* Botão Entrar */}
         <button
           type="submit"
           className="w-full bg-primary-green text-white py-2 rounded-lg hover:bg-primary-darkGreen transition-colors"
@@ -58,6 +61,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           Entrar
         </button>
 
+        {/* Links adicionais */}
         <div className="flex justify-between text-sm">
           <button
             type="button"
@@ -75,6 +79,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           </button>
         </div>
 
+        {/* Separador */}
         <div className="relative my-8">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300"></div>
@@ -86,28 +91,30 @@ export const LoginForm: React.FC<LoginFormProps> = ({
           </div>
         </div>
 
+        {/* Botões de login com Google e Apple */}
         <div className="grid grid-cols-2 gap-4">
+          {/* Botão Google */}
           <button
             type="button"
-            className="flex items-center justify-center  border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 px-4 hover:bg-gray-50"
           >
             <img
               src="https://storage.googleapis.com/gd-prod/images/a910d418-7123-4bc4-aa3b-ef7e25e74ae6.60c498c559810aa0.webp"
               alt="Google"
-              className="w-15 h-10 ml-2"
+              className="h-11"
             />
-            Google
           </button>
+
+          {/* Botão Apple */}
           <button
             type="button"
-            className="flex items-center justify-center px-2 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="flex items-center justify-center gap-2 border border-gray-300 rounded-lg py-2 px-4 hover:bg-gray-50"
           >
             <img
               src="https://logospng.org/wp-content/uploads/apple.jpg"
               alt="Apple"
-              className="h-8 ml-3"
+              className="h-11"
             />
-            Apple
           </button>
         </div>
       </form>
