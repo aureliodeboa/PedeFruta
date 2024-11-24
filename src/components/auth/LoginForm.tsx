@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Lock, Mail } from 'lucide-react';
+import { Lock, Mail } from 'lucide-react';
 
 interface LoginFormProps {
   onSubmit: (email: string, password: string) => void;

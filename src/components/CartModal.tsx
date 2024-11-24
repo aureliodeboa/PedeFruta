@@ -1,6 +1,5 @@
 import React from 'react';
 import { ItemCarrinho } from '../types/types';
-import { colors } from '../styles/colors';
 import { X, Trash2 } from 'lucide-react';
 
 interface CartModalProps {

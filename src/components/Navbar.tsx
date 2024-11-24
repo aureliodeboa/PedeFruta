@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ShoppingCart, Menu, X, Home, Package, LogIn } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { colors } from '../styles/colors';
 
 interface NavbarProps {
   quantidadeItens: number;
