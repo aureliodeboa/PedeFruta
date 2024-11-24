@@ -89,23 +89,23 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         <div className="grid grid-cols-2 gap-4">
           <button
             type="button"
-            className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="flex items-center justify-center  border border-gray-300 rounded-lg hover:bg-gray-50"
           >
             <img
-              src="/api/placeholder/24/24"
+              src="https://storage.googleapis.com/gd-prod/images/a910d418-7123-4bc4-aa3b-ef7e25e74ae6.60c498c559810aa0.webp"
               alt="Google"
-              className="w-6 h-6 mr-2"
+              className="w-15 h-10 ml-2"
             />
             Google
           </button>
           <button
             type="button"
-            className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+            className="flex items-center justify-center px-2 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
           >
             <img
-              src="/api/placeholder/24/24"
+              src="https://logospng.org/wp-content/uploads/apple.jpg"
               alt="Apple"
-              className="w-6 h-6 mr-2"
+              className="h-8 ml-3"
             />
             Apple
           </button>
